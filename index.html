@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morning Percentage Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr('#timepicker', {
+      enableTime: true,
+      noCalendar: true,
+      time_24hr: false,
+      dateFormat: 'h:i K'
+    });
+
+    function calculateMorningPercentage() {
+      const givenTime = document.getElementById('timepicker').value;
+      const [givenHours, givenMinutes] = givenTime.split(':');
+      const totalMinutesInMorning = 12 * 60;
+      const timeInMinutes = parseInt(givenHours) * 60 + parseInt(givenMinutes);
+      const percentage = (timeInMinutes / totalMinutesInMorning) * 100;
+      document.getElementById('result').innerHTML = `The percentage of ${givenTime} in the morning is approximately ${percentage.toFixed(2)}%`;
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Morning Time Percentage Calculator</h1>
+  </header>
+  <main>
+    <form>
+      <label for="timepicker">Select Time:</label>
+      <input type="text" id="timepicker" required>
+      <br>
+      <button type="button" id="calculateButton" onclick="calculateMorningPercentage()">Calculate Percentage</button>
+    </form>
+    <div id="result">Welcome to your morning time percentage calculator! Please provide your time.</div>
+  </main>
+</body>
+</html>
